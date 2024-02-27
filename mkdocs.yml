@@ -1,0 +1,16 @@
+site_name: mc68k-manual
+theme: readthedocs
+use_directory_urls: false
+
+markdown_extensions:
+ - footnotes
+ - extra
+
+nav:
+  - トップ: index.md
+  - データサイズ: data-size.md
+  - x68kツール: 
+    - ED.X-テキストエディタ: tool-EDx.md
+    - AS.X-アセンブラ: tool-ASx.md
+    - windrvXM.SYS-Windowsとのファイルやり取り: tool-windrvXMsys.md
+    - VOL.X-ボリューム名変更: tool-VOLx.md
