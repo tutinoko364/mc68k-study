@@ -47,6 +47,14 @@
                 <li class="toctree-l1"><a class="reference internal" href="data-size.html">データサイズ</a>
                 </li>
               </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="Frequent-command.html">よくつかう命令</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="dos-call.html">Human68kシステムコール</a>
+                </li>
+              </ul>
               <p class="caption"><span class="caption-text">x68kツール</span></p>
               <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="tool-EDx.html">ED.X-テキストエディタ</a>
@@ -55,6 +63,12 @@
                   </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="tool-windrvXMsys.html">windrvXM.SYS-Windowsとのファイルやり取り</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#x68k">X68k側の使用準備</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#windows">Windows側の準備</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_1">準備完了後</a>
+    </li>
     </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="tool-VOLx.html">VOL.X-ボリューム名変更</a>
@@ -91,10 +105,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h2 id="windrvxmsys-windows">windrvXM.SYS-Windowsとのファイルやり取り</h2>
+                <h1 id="windrvxmsys-windows">windrvXM.SYS-Windowsとのファイルやり取り</h1>
 <p>以下からダウンロード可能</p>
 <p><a href="http://coexe.web.fc2.com/WindrvXM.html">http://coexe.web.fc2.com/WindrvXM.html</a></p>
-<h1 id="x68k">X68k側の使用準備</h1>
+<h2 id="x68k">X68k側の使用準備</h2>
 <p>ディスクイメージ「WindrvXM.XDG」をマウントし、ドライバ「WindrvXM.SYS」をHDDにコピーする。</p>
 <pre><code>A&gt;copy b:*.SYS a:
 </code></pre>
@@ -108,13 +122,13 @@
 問題なく追記されているか確認すること。</p>
 <pre><code>type config.sys
 </code></pre>
-<h1 id="windows">Windows側の準備</h1>
+<h2 id="windows">Windows側の準備</h2>
 <p>XM6の「ツール」タブから、「オプション」を選択する。
 オプションウインドウの「Windrv」タブを選択する。</p>
 <p>「WindrvXMとWINDRVを使用する」にチェックを入れる。</p>
 <p>「ドライブ数」を１以上にする</p>
 <p>下リストをクリックし、共有を行うWindows側のフォルダパスを設定する。</p>
-<h1 id="_1">準備完了後</h1>
+<h2 id="_1">準備完了後</h2>
 <p>XM6をリセットすると、WindrvXM.SYSが読み込まれるようになっている。</p>
 <p>共有フォルダは、XM6のDドライブ(FDD二基、HDD一基の場合?)にマウントされる。</p>
 <pre><code>ドライブD:を登録しました

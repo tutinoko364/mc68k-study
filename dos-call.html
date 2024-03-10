@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="img/favicon.ico" />
-    <title>ED.X-テキストエディタ - mc68k-manual</title>
+    <title>Human68kシステムコール - mc68k-manual</title>
     <link rel="stylesheet" href="css/theme.css" />
     <link rel="stylesheet" href="css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "ED.X-\u30c6\u30ad\u30b9\u30c8\u30a8\u30c7\u30a3\u30bf";
-        var mkdocs_page_input_path = "tool-EDx.md";
+        var mkdocs_page_name = "Human68k\u30b7\u30b9\u30c6\u30e0\u30b3\u30fc\u30eb";
+        var mkdocs_page_input_path = "dos-call.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -51,15 +51,21 @@
                 <li class="toctree-l1"><a class="reference internal" href="Frequent-command.html">よくつかう命令</a>
                 </li>
               </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="dos-call.html">Human68kシステムコール</a>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="dos-call.html">Human68kシステムコール</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#_putchar">_PUTCHAR 一文字を標準出力</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_print">_PRINT 文字列を標準出力</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_getc-_getchar-_inkey">_GETC, _GETCHAR, _INKEY 標準入力</a>
+    </li>
+    </ul>
                 </li>
               </ul>
               <p class="caption"><span class="caption-text">x68kツール</span></p>
-              <ul class="current">
-                  <li class="toctree-l1 current"><a class="reference internal current" href="tool-EDx.html">ED.X-テキストエディタ</a>
-    <ul class="current">
-    </ul>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="tool-EDx.html">ED.X-テキストエディタ</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="tool-ASx.html">AS.X-アセンブラ</a>
                   </li>
@@ -89,8 +95,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="index.html" class="icon icon-home" aria-label="Docs"></a></li>
-          <li class="breadcrumb-item">x68kツール</li>
-      <li class="breadcrumb-item active">ED.X-テキストエディタ</li>
+      <li class="breadcrumb-item active">Human68kシステムコール</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -99,23 +104,80 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="edx-">ED.X-テキストエディタ</h1>
-<p>Human68kに付属する標準テキストエディタ。</p>
-<p>プロンプトに以下を入力して実行すると、「(ファイル名).S」がED.Xで開かれる。
-存在しないファイル名を指定した場合、新しく「(ファイル名).S」が作成され、</p>
-<pre><code>A&gt; ED (ファイル名).S
+                <h1 id="human68k">Human68kシステムコール</h1>
+<p>標準出力=通常はプロンプト。リダイレクト可能。
+標準入力=通常はキーボード。リダイレクト可能。</p>
+<h2 id="_putchar">_PUTCHAR 一文字を標準出力</h2>
+<p>ワードサイズで1文字を受け取り、標準出力に出力する。</p>
+<p>sample.s</p>
+<pre><code>_PUTCHAR    equ $ff02
+_EXIT       equ $ff00
+
+    move.w  #'a',-(sp)
+    .dc.w   _PUTCHAR
+    addq.l  #2,sp
+
+    .dc.w   _EXIT
 </code></pre>
-<ul>
-<li>Human68kでは、アセンブリソースファイルの拡張子を「.S」としている。</li>
-</ul>
-<p>編集中に、「ESCキー」を押すと、「ESC」モードに移る。
-「ESC」モード中に「Eキー」を押すことで、ファイルのセーブ後プロンプトに戻る。</p>
+<p>実行結果</p>
+<pre><code>A&gt;sample
+aA&gt;
+</code></pre>
+<h2 id="_print">_PRINT 文字列を標準出力</h2>
+<p>アドレススタックにプッシュされた、ラベルの文字列データを標準出力に出力する。
+文字列データの末尾には、終端文字として「0」を用意する必要がある。
+サンプル中の「$0d,$0a」は併せて改行文字である。</p>
+<p>sample.s</p>
+<pre><code>_PRINT    equ $ff09
+_EXIT       equ $ff00
+
+        pea     mes
+        .dc.w   _PRINT
+        addq.l  #4,sp
+
+        .dc.w   _EXIT
+mes:    .dc.b   'PRINT TEST',$0d,$0a,0
+</code></pre>
+<p>実行結果</p>
+<pre><code>A&gt;sample
+PRINT TEST
+A&gt;
+</code></pre>
+<h2 id="_getc-_getchar-_inkey">_GETC, _GETCHAR, _INKEY 標準入力</h2>
+<p>標準入力から受け取ったデータを、データレジスタ「d0」に格納する。
+_GETCHARは入力内容をエコーバックする。
+_INKEYはブレイクチェックが組み込まれており、実行中にBRKキーを押すと正常に終了する。(他の入力処理の場合、「^C」が表示されて終了する。)</p>
+<p>sample.s</p>
+<pre><code>_GETC       equ $ff08
+_GETCHAR    equ $ff01
+_INKEY      equ $ff07
+_EXIT       equ $ff00
+
+    .dc.w   _GETC       *_GETCHAR,_INKEYも同様に使用する
+    move.w  d0,-(sp)
+    .dc.w   _PUTCHAR
+    addq.l  #2,sp
+
+    .dc.w   _EXIT
+</code></pre>
+<p>実行結果 _GETC</p>
+<pre><code>A&gt;sample
+aA&gt;
+</code></pre>
+<p>実行結果 _GETCHAR</p>
+<pre><code>A&gt;sample
+aaA&gt;
+</code></pre>
+<p>実行結果 _INKEY</p>
+<pre><code>A&gt;sample
+aA&gt;
+</code></pre>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="dos-call.html" class="btn btn-neutral float-left" title="Human68kシステムコール"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="tool-ASx.html" class="btn btn-neutral float-right" title="AS.X-アセンブラ">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="Frequent-command.html" class="btn btn-neutral float-left" title="よくつかう命令"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="tool-EDx.html" class="btn btn-neutral float-right" title="ED.X-テキストエディタ">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -138,10 +200,10 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="dos-call.html" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="Frequent-command.html" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="tool-ASx.html" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="tool-EDx.html" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
