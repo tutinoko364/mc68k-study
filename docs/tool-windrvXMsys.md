@@ -1,10 +1,10 @@
-## windrvXM.SYS-Windowsとのファイルやり取り
+# windrvXM.SYS-Windowsとのファイルやり取り
 
 以下からダウンロード可能
 
 [http://coexe.web.fc2.com/WindrvXM.html](http://coexe.web.fc2.com/WindrvXM.html)
 
-# X68k側の使用準備
+## X68k側の使用準備
 
 ディスクイメージ「WindrvXM.XDG」をマウントし、ドライバ「WindrvXM.SYS」をHDDにコピーする。
 
@@ -23,7 +23,7 @@
 
     type config.sys
 
-# Windows側の準備
+## Windows側の準備
 
 XM6の「ツール」タブから、「オプション」を選択する。
 オプションウインドウの「Windrv」タブを選択する。
@@ -34,7 +34,7 @@ XM6の「ツール」タブから、「オプション」を選択する。
 
 下リストをクリックし、共有を行うWindows側のフォルダパスを設定する。
 
-# 準備完了後
+## 準備完了後
 
 XM6をリセットすると、WindrvXM.SYSが読み込まれるようになっている。
 

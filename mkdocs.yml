@@ -9,6 +9,8 @@ markdown_extensions:
 nav:
   - トップ: index.md
   - データサイズ: data-size.md
+  - よくつかう命令: Frequent-command.md
+  - Human68kシステムコール: dos-call.md
   - x68kツール: 
     - ED.X-テキストエディタ: tool-EDx.md
     - AS.X-アセンブラ: tool-ASx.md
