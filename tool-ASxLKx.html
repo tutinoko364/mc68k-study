@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="img/favicon.ico" />
-    <title>AS.X-アセンブラ - mc68k-manual</title>
+    <title>AS.X LK.X-アセンブラ リンカ - mc68k-manual</title>
     <link rel="stylesheet" href="css/theme.css" />
     <link rel="stylesheet" href="css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "AS.X-\u30a2\u30bb\u30f3\u30d6\u30e9";
-        var mkdocs_page_input_path = "tool-ASx.md";
+        var mkdocs_page_name = "AS.X LK.X-\u30a2\u30bb\u30f3\u30d6\u30e9 \u30ea\u30f3\u30ab";
+        var mkdocs_page_input_path = "tool-ASxLKx.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -67,7 +67,7 @@
               <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="tool-EDx.html">ED.X-テキストエディタ</a>
                   </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="tool-ASx.html">AS.X-アセンブラ</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="tool-ASxLKx.html">AS.X LK.X-アセンブラ リンカ</a>
     <ul class="current">
     </ul>
                   </li>
@@ -98,7 +98,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="index.html" class="icon icon-home" aria-label="Docs"></a></li>
           <li class="breadcrumb-item">x68kツール</li>
-      <li class="breadcrumb-item active">AS.X-アセンブラ</li>
+      <li class="breadcrumb-item active">AS.X LK.X-アセンブラ リンカ</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -112,6 +112,16 @@
 <p>以下のコマンドでAS.Xが起動し、アセンブルが実行される。</p>
 <pre><code>A&gt;AS (ファイル名).S
 </code></pre>
+<p>アセンブルが成功すると、オブジェクトファイルが生成される(.O)。</p>
+<h1 id="lkx-">LK.X-リンカ</h1>
+<p>Human68kに付属する標準リンカ。</p>
+<p>以下のコマンドでLK.Xが起動し、リンクが実行される。</p>
+<pre><code>A&gt;LK (ファイル名).O
+</code></pre>
+<p>対象がオブジェクトファイル(.O)の場合、拡張子を省略できる。</p>
+<pre><code>A&gt;LK (ファイル名)
+</code></pre>
+<p>リンクが成功すると、実行可能ファイルが生成される。</p>
               
             </div>
           </div><footer>
