@@ -3,17 +3,17 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="description" content="None" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="img/favicon.ico" />
-    <title>mc68k-manual</title>
+    <title>アドレッシングモード - mc68k-manual</title>
     <link rel="stylesheet" href="css/theme.css" />
     <link rel="stylesheet" href="css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "\u30c8\u30c3\u30d7";
-        var mkdocs_page_input_path = "index.md";
+        var mkdocs_page_name = "\u30a2\u30c9\u30ec\u30c3\u30b7\u30f3\u30b0\u30e2\u30fc\u30c9";
+        var mkdocs_page_input_path = "Frequent-addressing.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -39,14 +39,8 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="index.html">トップ</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#commands">Commands</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#project-layout">Project layout</a>
-    </li>
-    </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="index.html">トップ</a>
                 </li>
               </ul>
               <ul>
@@ -57,8 +51,22 @@
                 <li class="toctree-l1"><a class="reference internal" href="Frequent-command.html">よくつかう命令</a>
                 </li>
               </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="Frequent-addressing.html">アドレッシングモード</a>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="Frequent-addressing.html">アドレッシングモード</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#_2">レジスタ直接アドレッシング</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_3">イミディエイト アドレッシング</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_4">絶対アドレッシング</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_5">アドレスレジスタ間接アドレッシング</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_6">ポストインクリメントアドレスレジスタ間接アドレッシング</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_7">プレデクリメントアドレスレジスタ間接アドレッシング</a>
+    </li>
+    </ul>
                 </li>
               </ul>
               <ul>
@@ -101,7 +109,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="index.html" class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">トップ</li>
+      <li class="breadcrumb-item active">アドレッシングモード</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -110,26 +118,50 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="welcome-to-mkdocs">Welcome to MkDocs</h1>
-<p>For full documentation visit <a href="https://www.mkdocs.org">mkdocs.org</a>.</p>
-<h2 id="commands">Commands</h2>
-<ul>
-<li><code>mkdocs new [dir-name]</code> - Create a new project.</li>
-<li><code>mkdocs serve</code> - Start the live-reloading docs server.</li>
-<li><code>mkdocs build</code> - Build the documentation site.</li>
-<li><code>mkdocs -h</code> - Print help message and exit.</li>
-</ul>
-<h2 id="project-layout">Project layout</h2>
-<pre><code>mkdocs.yml    # The configuration file.
-docs/
-    index.md  # The documentation homepage.
-    ...       # Other markdown pages, images and other files.
+                <h1 id="_1">アドレッシングモード</h1>
+<h2 id="_2">レジスタ直接アドレッシング</h2>
+<p>レジスタ名を直接使用する</p>
+<pre><code>move    d0,a1
+</code></pre>
+<h2 id="_3">イミディエイト アドレッシング</h2>
+<p>定数(即値,イミディエイト)をソースに使用する
+即値は数字の頭に「#」をつける</p>
+<pre><code>add     #200,A     * A = A + 200
+add     #$1b4,A     * A = A + 200
+add     #%10011,A     * A = A + 200
+move     #'いろは',d1
+</code></pre>
+<h2 id="_4">絶対アドレッシング</h2>
+<p>16進数のアドレスが示す番地の値を操作する</p>
+<pre><code>move    $80000,d0   * $80000番地の値をd0に格納する
+move    #100,$80000 * 即値100を$80000番地に格納する
+</code></pre>
+<h2 id="_5">アドレスレジスタ間接アドレッシング</h2>
+<p>アドレスレジスタの値をアドレスとみなし、そのアドレスで指定される番地を参照する。
+C言語におけるポインタのように使用する。
+int * val;
+*val == (a0)</p>
+<pre><code>move    (a0),d0     * a0が示す番地に格納された値を、d0に格納する
+move    d0,(a0)     * d0の値を、a0が示す番地に格納する
+</code></pre>
+<h2 id="_6">ポストインクリメントアドレスレジスタ間接アドレッシング</h2>
+<p>アドレスレジスタ間接アドレッシングのアドレスレジスタの後ろに「+」を付ける。
+アドレスレジスタ間接アドレッシングによる演算後、+がついているアドレスレジスタの値が、
+指定のサイズ分(.b:+2, .w: +4, .l: +8)インクリメントされる。</p>
+<pre><code>move.b  (a0)+,d0     * a0が示す番地に格納された値を、d0に格納した後、a0に格納されたアドレス値をインクリメント
+</code></pre>
+<h2 id="_7">プレデクリメントアドレスレジスタ間接アドレッシング</h2>
+<p>アドレスレジスタ間接アドレッシングのアドレスレジスタの前に「-」を付ける。
+アドレスレジスタ間接アドレッシングによる演算前、-がついているアドレスレジスタの値が、
+指定のサイズ分(.b:+2, .w: +4, .l: +8)デクリメントされる。</p>
+<pre><code>move.b  -(a0),d0     * a0に格納されたアドレス値をデクリメント後、a0が示す番地に格納された値を、d0に格納する
 </code></pre>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="data-size.html" class="btn btn-neutral float-right" title="データサイズ">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="Frequent-command.html" class="btn btn-neutral float-left" title="よくつかう命令"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="Stack.html" class="btn btn-neutral float-right" title="スタック">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -152,8 +184,10 @@ docs/
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
+      <span><a href="Frequent-command.html" style="color: #fcfcfc">&laquo; Previous</a></span>
     
-      <span><a href="data-size.html" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+      <span><a href="Stack.html" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
@@ -170,8 +204,3 @@ docs/
 
 </body>
 </html>
-
-<!--
-MkDocs version : 1.5.3
-Build Date UTC : 2024-03-28 16:53:40.215461+00:00
--->

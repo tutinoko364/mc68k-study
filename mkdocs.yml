@@ -10,6 +10,8 @@ nav:
   - トップ: index.md
   - データサイズ: data-size.md
   - よくつかう命令: Frequent-command.md
+  - アドレッシングモード: Frequent-addressing.md
+  - スタック: Stack.md
   - Human68kシステムコール: dos-call.md
   - x68kツール: 
     - ED.X-テキストエディタ: tool-EDx.md

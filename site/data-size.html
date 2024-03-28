@@ -46,15 +46,19 @@
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="data-size.html">データサイズ</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#commands">Commands</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#project-layout">Project layout</a>
-    </li>
     </ul>
                 </li>
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="Frequent-command.html">よくつかう命令</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="Frequent-addressing.html">アドレッシングモード</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="Stack.html">スタック</a>
                 </li>
               </ul>
               <ul>
@@ -103,21 +107,18 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="_1">データサイズ</h1>
-<p>For full documentation visit <a href="https://www.mkdocs.org">mkdocs.org</a>.</p>
-<h2 id="commands">Commands</h2>
 <p>MOVE命令を例に、オペランドサイズ指定の記法を記す。</p>
 <p>バイト:1バイト=8ビット</p>
 <ul>
-<li><code>move.B #FF d0</code> - バイト:1バイト=8ビット</li>
-<li><code>move.W #FFFF d0</code> - バイト:1バイト=8ビット</li>
-<li><code>mkdocs build</code> - Build the documentation site.</li>
-<li><code>mkdocs -h</code> - Print help message and exit.</li>
+<li><code>move.b #$FF d0</code> - バイト:1バイト=8ビット</li>
+<li><code>move.w #$FFFF d0</code> - ワード:2バイト=16ビット</li>
+<li><code>move.l #$FFFFFFFF d0</code> - ロング:4バイト=32ビット</li>
 </ul>
-<h2 id="project-layout">Project layout</h2>
-<pre><code>mkdocs.yml    # The configuration file.
-docs/
-    index.md  # The documentation homepage.
-    ...       # Other markdown pages, images and other files.
+<p>バイト、ワードのデータサイズの場合、デスティネーションの下位ビットに対して操作される。</p>
+<pre><code>move.L  #$FFFFFFFF,d0   * d0 = $FFFFFFFF
+move.b  #$12,d0         * d0 = $FFFFFF12 下位8ビットに上書きされる
+move.w  #$3456,d0       * d0 = $FFFF3456 下位16ビットに上書きされる
+move    #$789a,d0       * d0 = $FFFF789a データサイズ指定を省略すると、ワードが指定される
 </code></pre>
               
             </div>

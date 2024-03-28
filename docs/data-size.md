@@ -1,21 +1,16 @@
 # データサイズ
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
-
-## Commands
-
 MOVE命令を例に、オペランドサイズ指定の記法を記す。
 
 バイト:1バイト=8ビット
 
-* `move.B #FF d0` - バイト:1バイト=8ビット
-* `move.W #FFFF d0` - バイト:1バイト=8ビット
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+* `move.b #$FF d0` - バイト:1バイト=8ビット
+* `move.w #$FFFF d0` - ワード:2バイト=16ビット
+* `move.l #$FFFFFFFF d0` - ロング:4バイト=32ビット
 
-## Project layout
+バイト、ワードのデータサイズの場合、デスティネーションの下位ビットに対して操作される。
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+    move.L  #$FFFFFFFF,d0   * d0 = $FFFFFFFF
+    move.b  #$12,d0         * d0 = $FFFFFF12 下位8ビットに上書きされる
+    move.w  #$3456,d0       * d0 = $FFFF3456 下位16ビットに上書きされる
+    move    #$789a,d0       * d0 = $FFFF789a データサイズ指定を省略すると、ワードが指定される
