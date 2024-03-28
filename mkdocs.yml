@@ -15,7 +15,7 @@ nav:
   - Human68kシステムコール: dos-call.md
   - x68kツール: 
     - ED.X-テキストエディタ: tool-EDx.md
-    - AS.X-アセンブラ: tool-ASx.md
+    - AS.X LK.X-アセンブラ リンカ: tool-ASxLKx.md
     - windrvXM.SYS-Windowsとのファイルやり取り: tool-windrvXMsys.md
     - VOL.X-ボリューム名変更: tool-VOLx.md
   - 設定:
