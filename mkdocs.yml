@@ -18,6 +18,7 @@ nav:
     - AS.X LK.X-アセンブラ リンカ: tool-ASxLKx.md
     - windrvXM.SYS-Windowsとのファイルやり取り: tool-windrvXMsys.md
     - VOL.X-ボリューム名変更: tool-VOLx.md
+    - DOSコマンド: tool-DOScommand.md
   - 設定:
     - パスを通す: setting-PATH.md
     - プロンプトにカレントパスを表示する: setting-promptCurPath.md

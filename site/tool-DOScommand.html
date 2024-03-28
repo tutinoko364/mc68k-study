@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="img/favicon.ico" />
-    <title>windrvXM.SYS-Windowsとのファイルやり取り - mc68k-manual</title>
+    <title>DOSコマンド - mc68k-manual</title>
     <link rel="stylesheet" href="css/theme.css" />
     <link rel="stylesheet" href="css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "windrvXM.SYS-Windows\u3068\u306e\u30d5\u30a1\u30a4\u30eb\u3084\u308a\u53d6\u308a";
-        var mkdocs_page_input_path = "tool-windrvXMsys.md";
+        var mkdocs_page_name = "DOS\u30b3\u30de\u30f3\u30c9";
+        var mkdocs_page_input_path = "tool-DOScommand.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -69,19 +69,13 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="tool-ASxLKx.html">AS.X LK.X-アセンブラ リンカ</a>
                   </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="tool-windrvXMsys.html">windrvXM.SYS-Windowsとのファイルやり取り</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#x68k">X68k側の使用準備</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#windows">Windows側の準備</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#_1">準備完了後</a>
-    </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="tool-windrvXMsys.html">windrvXM.SYS-Windowsとのファイルやり取り</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="tool-VOLx.html">VOL.X-ボリューム名変更</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="tool-DOScommand.html">DOSコマンド</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="tool-DOScommand.html">DOSコマンド</a>
+    <ul class="current">
+    </ul>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">設定</span></p>
@@ -106,7 +100,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="index.html" class="icon icon-home" aria-label="Docs"></a></li>
           <li class="breadcrumb-item">x68kツール</li>
-      <li class="breadcrumb-item active">windrvXM.SYS-Windowsとのファイルやり取り</li>
+      <li class="breadcrumb-item active">DOSコマンド</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -115,40 +109,15 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="windrvxmsys-windows">windrvXM.SYS-Windowsとのファイルやり取り</h1>
-<p>以下からダウンロード可能</p>
-<p><a href="http://coexe.web.fc2.com/WindrvXM.html">http://coexe.web.fc2.com/WindrvXM.html</a></p>
-<h2 id="x68k">X68k側の使用準備</h2>
-<p>ディスクイメージ「WindrvXM.XDG」をマウントし、ドライバ「WindrvXM.SYS」をHDDにコピーする。</p>
+                <h1 id="copy">copy</h1>
 <pre><code>A&gt;copy b:*.SYS a:
-</code></pre>
-<p>ドライバが読み込まれるように、config.sysを編集する。</p>
-<pre><code>A&gt; ED config.sys
-</code></pre>
-<p>末尾に以下を追記してセーブする。(ESCキー押下後、Eキー押下でセーブ)</p>
-<pre><code>DEVICE = \WindrvXM.SYS
-</code></pre>
-<p>プロンプトから以下を実行することで、config.sysの内容がダンプされる。
-問題なく追記されているか確認すること。</p>
-<pre><code>type config.sys
-</code></pre>
-<h2 id="windows">Windows側の準備</h2>
-<p>XM6の「ツール」タブから、「オプション」を選択する。
-オプションウインドウの「Windrv」タブを選択する。</p>
-<p>「WindrvXMとWINDRVを使用する」にチェックを入れる。</p>
-<p>「ドライブ数」を１以上にする</p>
-<p>下リストをクリックし、共有を行うWindows側のフォルダパスを設定する。</p>
-<h2 id="_1">準備完了後</h2>
-<p>XM6をリセットすると、WindrvXM.SYSが読み込まれるようになっている。</p>
-<p>共有フォルダは、XM6のDドライブ(FDD二基、HDD一基の場合?)にマウントされる。</p>
-<pre><code>ドライブD:を登録しました
 </code></pre>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="tool-ASxLKx.html" class="btn btn-neutral float-left" title="AS.X LK.X-アセンブラ リンカ"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="tool-VOLx.html" class="btn btn-neutral float-right" title="VOL.X-ボリューム名変更">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="tool-VOLx.html" class="btn btn-neutral float-left" title="VOL.X-ボリューム名変更"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="setting-PATH.html" class="btn btn-neutral float-right" title="パスを通す">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -171,10 +140,10 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="tool-ASxLKx.html" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="tool-VOLx.html" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="tool-VOLx.html" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="setting-PATH.html" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
