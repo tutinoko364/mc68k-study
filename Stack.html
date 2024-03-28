@@ -3,17 +3,17 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="description" content="None" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="img/favicon.ico" />
-    <title>mc68k-manual</title>
+    <title>スタック - mc68k-manual</title>
     <link rel="stylesheet" href="css/theme.css" />
     <link rel="stylesheet" href="css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "\u30c8\u30c3\u30d7";
-        var mkdocs_page_input_path = "index.md";
+        var mkdocs_page_name = "\u30b9\u30bf\u30c3\u30af";
+        var mkdocs_page_input_path = "Stack.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -39,14 +39,8 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="index.html">トップ</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#commands">Commands</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#project-layout">Project layout</a>
-    </li>
-    </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="index.html">トップ</a>
                 </li>
               </ul>
               <ul>
@@ -61,8 +55,10 @@
                 <li class="toctree-l1"><a class="reference internal" href="Frequent-addressing.html">アドレッシングモード</a>
                 </li>
               </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="Stack.html">スタック</a>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="Stack.html">スタック</a>
+    <ul class="current">
+    </ul>
                 </li>
               </ul>
               <ul>
@@ -101,7 +97,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="index.html" class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">トップ</li>
+      <li class="breadcrumb-item active">スタック</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -110,26 +106,24 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="welcome-to-mkdocs">Welcome to MkDocs</h1>
-<p>For full documentation visit <a href="https://www.mkdocs.org">mkdocs.org</a>.</p>
-<h2 id="commands">Commands</h2>
-<ul>
-<li><code>mkdocs new [dir-name]</code> - Create a new project.</li>
-<li><code>mkdocs serve</code> - Start the live-reloading docs server.</li>
-<li><code>mkdocs build</code> - Build the documentation site.</li>
-<li><code>mkdocs -h</code> - Print help message and exit.</li>
-</ul>
-<h2 id="project-layout">Project layout</h2>
-<pre><code>mkdocs.yml    # The configuration file.
-docs/
-    index.md  # The documentation homepage.
-    ...       # Other markdown pages, images and other files.
+                <h1 id="_1">スタック</h1>
+<p>mc68000ではアドレスレジスタ７番(a7)をスタックポインタとして使用する。
+アセンブラでは「sp」と表記することができる。</p>
+<pre><code>move.l  d0,-(sp)    * プッシュ
+move.l  (sp+),d0    * ポップ
+
+move.l  (sp),d1     * spを間接アドレッシングでみると、スタックの先頭の値を確認することになる
 </code></pre>
+<p>mc68000ではスタック操作用の命令は無く、スタックポインタに対してポストインクリメントアドレスレジスタ間接アドレッシングと
+プレデクリメントアドレスレジスタ間接アドレッシングを使用することでプッシュ・ポップ操作を行う。</p>
+<p>サブルーチンを呼び出すときには、レジスタすべてを指定してスタックにプッシュすることで、呼び出し元の状態を保持できる。
+サブルーチンから復帰後に、スタックからポップすることで、サブルーチン呼び出し時点の状態を復元できる。</p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="data-size.html" class="btn btn-neutral float-right" title="データサイズ">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="Frequent-addressing.html" class="btn btn-neutral float-left" title="アドレッシングモード"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="dos-call.html" class="btn btn-neutral float-right" title="Human68kシステムコール">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -152,8 +146,10 @@ docs/
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
+      <span><a href="Frequent-addressing.html" style="color: #fcfcfc">&laquo; Previous</a></span>
     
-      <span><a href="data-size.html" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+      <span><a href="dos-call.html" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
@@ -170,8 +166,3 @@ docs/
 
 </body>
 </html>
-
-<!--
-MkDocs version : 1.5.3
-Build Date UTC : 2024-03-28 16:53:40.215461+00:00
--->

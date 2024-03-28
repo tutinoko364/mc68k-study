@@ -50,7 +50,27 @@
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="Frequent-command.html">よくつかう命令</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#move">move</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#addsub">add,sub</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#andoreor">and,or,eor</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#cmp">cmp</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#brabeqbne">bra,beq,bne</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#bsrrts">bsr,rts</a>
+    </li>
     </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="Frequent-addressing.html">アドレッシングモード</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="Stack.html">スタック</a>
                 </li>
               </ul>
               <ul>
@@ -99,12 +119,45 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="_1">よくつかう命令</h1>
+<p>以下の命令を例にすると、「move」がオペレーション部、「A,B」がオペランド部となる。
+オペランド部の内、「B」が第一オペランド(ソース)、「A」が第二オペランド(デスティネーション)である。</p>
+<pre><code>move    B,A
+</code></pre>
+<h2 id="move">move</h2>
+<pre><code>move    転送元,転送先
+</code></pre>
+<h2 id="addsub">add,sub</h2>
+<p>BにAを足し(BからAを引き)、結果をAに格納する。</p>
+<pre><code>add     B,A     * A = A + B
+sub     B,A     * A = A - B
+</code></pre>
+<h2 id="andoreor">and,or,eor</h2>
+<p>論理演算。結果はAに格納される。</p>
+<pre><code>and     B,A
+or      B,A
+eor     B,A
+</code></pre>
+<h2 id="cmp">cmp</h2>
+<p>比較命令。結果はコンディションコードに反映される。</p>
+<pre><code>cmp     B,A
+</code></pre>
+<h2 id="brabeqbne">bra,beq,bne</h2>
+<p>分岐命令。オペランドに設定したラベルに処理を分岐する。</p>
+<pre><code>bra     分岐先(ラベル)  * Branch Always 無条件に処理を分岐先へ分岐する(if true)
+beq     分岐先(ラベル)  * Equal         直前の比較の結果が等しければ分岐する(if B == A)
+bne     分岐先(ラベル)  * Not Equal     直前の比較の結果が等しくなければ分岐する(if B != A)
+</code></pre>
+<h2 id="bsrrts">bsr,rts</h2>
+<p>サブルーチンへの分岐命令。</p>
+<pre><code>bsr     分岐先(ラベル、アドレス)  * サブルーチンへ分岐する
+rts                             * サブルーチンの呼び出し地点へ復帰する
+</code></pre>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
         <a href="data-size.html" class="btn btn-neutral float-left" title="データサイズ"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="dos-call.html" class="btn btn-neutral float-right" title="Human68kシステムコール">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="Frequent-addressing.html" class="btn btn-neutral float-right" title="アドレッシングモード">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -130,7 +183,7 @@
       <span><a href="data-size.html" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="dos-call.html" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="Frequent-addressing.html" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
